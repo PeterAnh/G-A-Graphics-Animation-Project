@@ -30,7 +30,7 @@ You can also download a movie file (including audio) [252MB] (when unzipped, it 
 The skeleton code draws the ground, an initial mesh object and a sphere showing the position of a single point light source; however, it has the camera always facing the same way. You can move it forwards and backwards using the scroll wheel, via the viewDist variable, but there's no way to move it otherwise. You should fix this problem in the code. The variables camRotUpAndOverDeg and camRotSidewaysDeg are already set appropriately when moving the mouse with the left button down, or the middle button down (or shift + left button). Modify the display function so that the camera rotates around the centre point according to these variables, in the same way as the sample solution shown in the video below. 
 
 ### Tasks:
-[x]* **Task A:**<br/> 
+* [x] **Task A:**<br/> 
 <del>Your scene editor should do the following:
 When the left mouse button is held down and dragged horizontally across the window, it should rotate the scene about the axis that is vertical to the ground plane.
 When the left mouse button is held down and dragged vertically up (or down) in the window, it should zoom into (or out of) the scene.
@@ -68,15 +68,15 @@ the middle mouse button for changing the y-coordinates
 of the light source's position
 
 
-* **Task D:**<br/>
-In the skeleton code, triangles are "clipped" (not displayed) if they are even slightly close to the camera. Fix the reshape callback function so that the camera can give more "close up" views of objects. 
+* [x] **Task D:**<br/>
+<del>In the skeleton code, triangles are "clipped" (not displayed) if they are even slightly close to the camera. Fix the reshape callback function so that the camera can give more "close up" views of objects.</del> Done! :laughing:
  
 
  
 
 
-* **Task E:**<br/>
-Also modify the reshape function, so that it behaves differently when the width is less than the height: basically whatever is visible when the window is square should continue to be visible as the width is decreased, similar to what happens if the window height is decreased starting with a square. 
+* [x] **Task E:**<br/>
+<del>Also modify the reshape function, so that it behaves differently when the width is less than the height: basically whatever is visible when the window is square should continue to be visible as the width is decreased, similar to what happens if the window height is decreased starting with a square. </del> Done! :laughing:
  
 
 
