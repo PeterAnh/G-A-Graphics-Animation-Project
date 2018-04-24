@@ -30,13 +30,13 @@ You can also download a movie file (including audio) [252MB] (when unzipped, it 
 The skeleton code draws the ground, an initial mesh object and a sphere showing the position of a single point light source; however, it has the camera always facing the same way. You can move it forwards and backwards using the scroll wheel, via the viewDist variable, but there's no way to move it otherwise. You should fix this problem in the code. The variables camRotUpAndOverDeg and camRotSidewaysDeg are already set appropriately when moving the mouse with the left button down, or the middle button down (or shift + left button). Modify the display function so that the camera rotates around the centre point according to these variables, in the same way as the sample solution shown in the video below. 
 
 ### Tasks:
-* **Task A:**<br/> 
-Your scene editor should do the following:
+[x]* **Task A:**<br/> 
+<del>Your scene editor should do the following:
 When the left mouse button is held down and dragged horizontally across the window, it should rotate the scene about the axis that is vertical to the ground plane.
 When the left mouse button is held down and dragged vertically up (or down) in the window, it should zoom into (or out of) the scene.
 Dragging the middle mouse button horizontally is the same as dragging the left button horizontally.
 Dragging the middle mouse button vertically up (or down) across the window should change the elevation angle of the camera looking at the ground plane. Correspondingly, this tilts the entire scene up (or down).
-n.The skeleton code draws the ground, an initial mesh object and a sphere showing the position of a single point light source; however, it has the camera always facing the same way. You can move it forwards and backwards using the scroll wheel, via the viewDist variable, but there's no way to move it otherwise. You should fix this problem in the code. The variables camRotUpAndOverDeg and camRotSidewaysDeg are already set appropriately when moving the mouse with the left button down, or the middle button down (or shift + left button). Modify the display function so that the camera rotates around the centre point according to these variables, in the same way as the sample solution shown in the video below. 
+n.The skeleton code draws the ground, an initial mesh object and a sphere showing the position of a single point light source; however, it has the camera always facing the same way. You can move it forwards and backwards using the scroll wheel, via the viewDist variable, but there's no way to move it otherwise. You should fix this problem in the code. The variables camRotUpAndOverDeg and camRotSidewaysDeg are already set appropriately when moving the mouse with the left button down, or the middle button down (or shift + left button). Modify the display function so that the camera rotates around the centre point according to these variables, in the same way as the sample solution shown in the video below.</del> Done :laughing: 
 
 
 * **Task B:**<br/>
