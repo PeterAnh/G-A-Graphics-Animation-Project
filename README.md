@@ -25,8 +25,8 @@ Although the videos don't have any audio, all the mouse actions were captured in
 When the circle next to the mouse icon turns into red, it indicates that the left mouse button is held down.
 When the circle becomes green, it indicates that the middle mouse button is held down. When the wheel of the middle mouse button is rolled, you should see an arrow and its direction.
 The right mouse button is reserved for bringing up the menu.
-For your convenience, you can download the Zip file [87MB] of all the videos below.
-You can also download a movie file (including audio) [252MB] (when unzipped, it would come to approximately 260MB) that explains about the camera's position, viewing direction, and some basic mouse events.
+For your convenience, you can download the Zip file [87MB](http://teaching.csse.uwa.edu.au/units/CITS3003/laboratories/project-common/project1-videos.zip) of all the videos below.
+You can also download a movie file (including audio) [252MB](http://teaching.csse.uwa.edu.au/units/CITS3003/laboratories/project-common/project-demo.mov.gz) (when unzipped, it would come to approximately 260MB) that explains about the camera's position, viewing direction, and some basic mouse events.
 The skeleton code draws the ground, an initial mesh object and a sphere showing the position of a single point light source; however, it has the camera always facing the same way. You can move it forwards and backwards using the scroll wheel, via the viewDist variable, but there's no way to move it otherwise. You should fix this problem in the code. The variables camRotUpAndOverDeg and camRotSidewaysDeg are already set appropriately when moving the mouse with the left button down, or the middle button down (or shift + left button). Modify the display function so that the camera rotates around the centre point according to these variables, in the same way as the sample solution shown in the video below. 
 
 ### Tasks:
@@ -36,12 +36,17 @@ When the left mouse button is held down and dragged horizontally across the wind
 When the left mouse button is held down and dragged vertically up (or down) in the window, it should zoom into (or out of) the scene.
 Dragging the middle mouse button horizontally is the same as dragging the left button horizontally.
 Dragging the middle mouse button vertically up (or down) across the window should change the elevation angle of the camera looking at the ground plane. Correspondingly, this tilts the entire scene up (or down).
-n.The skeleton code draws the ground, an initial mesh object and a sphere showing the position of a single point light source; however, it has the camera always facing the same way. You can move it forwards and backwards using the scroll wheel, via the viewDist variable, but there's no way to move it otherwise. You should fix this problem in the code. The variables camRotUpAndOverDeg and camRotSidewaysDeg are already set appropriately when moving the mouse with the left button down, or the middle button down (or shift + left button). Modify the display function so that the camera rotates around the centre point according to these variables, in the same way as the sample solution shown in the video below.</del> Done :laughing: 
+  
+[![Task A](https://i.ytimg.com/vi/Oq9-pHFsZZc/sddefault.jpg)](https://www.youtube.com/watch?v=Oq9-pHFsZZc)
+  
+<del>  The skeleton code draws the ground, an initial mesh object and a sphere showing the position of a single point light source; however, it has the camera always facing the same way. You can move it forwards and backwards using the scroll wheel, via the viewDist variable, but there's no way to move it otherwise. You should fix this problem in the code. The variables camRotUpAndOverDeg and camRotSidewaysDeg are already set appropriately when moving the mouse with the left button down, or the middle button down (or shift + left button). Modify the display function so that the camera rotates around the centre point according to these variables, in the same way as the sample solution shown in the video below.</del> Done :laughing: 
 
 
 * **Task B:**<br/>
 Similarly, changing the location and scale of objects is already implemented, via the loc and scale members of the SceneObject structure, which is stored in the variable sceneObjs for each object in the scene. However, the angles array in this structure doesn't affect what's drawn, even though it is appropriately set to contain the rotations around the X, Y and Z axes, in degrees. Modify the drawMesh function so that it appropriately rotates the object when drawing it in the same way as the sample solution.
 Note: The skeleton code also moves objects in different directions compared to the sample solution -- you should also fix this (Hint: there is more than one way to do this).
+
+[![Task B](https://i.ytimg.com/vi/Vg0UOkO9Dok/sddefault.jpg)](https://youtu.be/Vg0UOkO9Dok)
 
   As shown in the video, your scene editor should do the following:
 Dragging the left mouse button vertically across the window should rotate the current object about the x-axis (parallel to the ground plane and pointing to the right).
