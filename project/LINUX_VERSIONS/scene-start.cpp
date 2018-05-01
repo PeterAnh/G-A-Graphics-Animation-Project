@@ -479,7 +479,17 @@ static int createArrayMenu(int size, const char menuEntries[][128], void(*menuFn
     }
     return menuId;
 }
+static void adjustAmbientAndDiffuse(vec2 amb_diff)
+{
+    sceneObjs[currObject].ambient += amb_diff[0];
+    sceneObjs[currObject].diffuse += amb_diff[1];
+}
 
+static void adjustSpecularAndShine(vec2 spec_shine)
+{
+    sceneObjs[currObject].specular += spec_shine[0];
+    sceneObjs[currObject].shine    += spec_shine[1];
+}
 static void materialMenu(int id)
 {
     deactivateTool();
@@ -489,7 +499,13 @@ static void materialMenu(int id)
         setToolCallbacks(adjustRedGreen, mat2(1, 0, 0, 1),
                          adjustBlueBrightness, mat2(1, 0, 0, 1) );
     }
-    // You'll need to fill in the remaining menu items here.                                                
+    // You'll need to fill in the remaining menu items here.
+    else if (id==20)
+    {
+        toolObj = currObject;
+        setToolCallbacks(adjustAmbientAndDiffuse, mat2(1,0,0,1),
+                         adjustSpecularAndShine, mat2(1,0,0,1));
+    }                                               
     else {
         printf("Error in materialMenu\n");
     }
