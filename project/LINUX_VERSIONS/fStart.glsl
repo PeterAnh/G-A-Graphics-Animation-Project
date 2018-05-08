@@ -31,17 +31,15 @@ void main()
     float Kd = max(dot(L,N), 0.0);
     vec3 diffuse = Kd * DiffuseProduct;
 
-    float Ks = pow(max(dot(N,H),0.0), Shininess);
-    vec3 specular = Ks * SpecularProduct;
+    float Ks = pow(max(dot(N,H),0.0), Shininess/distance);
+    vec3 specular = (Ks * SpecularProduct);
+    //vec3 white = vec3(255.0,255.0,255.0);
 
     if(dot(L,N) < 0.0)
     {
         specular = vec3(0.0,0.0,0.0);
     }
-    if(distance < 0.0)
-    {
-        specular = vec3(255.0,255.0,255.0);
-    }
+
     // globalAmbient is independent of distance from the light source
     //vec3 globalAmbient = vec3(0.1, 0.1, 0.1);
 

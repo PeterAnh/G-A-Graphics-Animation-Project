@@ -60,7 +60,8 @@ void main()
     color.a = 1.0;
     */
     //Everything above is moved to fragment shader (task G)
-    distance = 0.1 + 0.5 * length(LightPosition) + 0.1*pow(length(LightPosition),2);
+    //distance = 0.1 + 0.5 * length(LightPosition) + 0.5*pow(length(LightPosition),2);
+    distance = 0.0*length(LightPosition)+ 0.1*pow(length(LightPosition),2);
     gl_Position = Projection * ModelView * vPosition;
     texCoord = vTexCoord;
 }
