@@ -11,6 +11,7 @@ varying vec3 fN;
 varying vec3 fL;
 varying vec3 fE;
 
+varying float distance;
 //uniform vec3 AmbientProduct, DiffuseProduct, SpecularProduct; <-- move to fragment shader
 uniform mat4 ModelView;
 uniform mat4 Projection;
@@ -59,7 +60,7 @@ void main()
     color.a = 1.0;
     */
     //Everything above is moved to fragment shader (task G)
-
+    distance = 0.1 + 0.5 * length(LightPosition) + 0.1*pow(length(LightPosition),2);
     gl_Position = Projection * ModelView * vPosition;
     texCoord = vTexCoord;
 }
