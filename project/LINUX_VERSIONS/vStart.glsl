@@ -11,12 +11,16 @@ varying vec3 fN;
 varying vec3 fL;
 varying vec3 fE;
 
-varying float distance;
+varying float distance1;
+varying float distance2;
 //uniform vec3 AmbientProduct, DiffuseProduct, SpecularProduct; <-- move to fragment shader
 uniform mat4 ModelView;
 uniform mat4 Projection;
 uniform vec4 LightPosition;
 //uniform float Shininess; <-- move to fragment shader
+
+varying vec3 fL2;
+uniform vec4 LightPosition2;
 
 void main()
 {
@@ -27,7 +31,8 @@ void main()
     vec3 pos = (ModelView * vPosition).xyz;
 
 
-    // The vector to the light from the vertex    
+    // The vector to the light from the vertex
+    fL2= LightPosition2.xyz;
     fL = LightPosition.xyz - pos;            // Direction to the light source
     fE = -pos;                               // Direction to the eye/camera
     fN = (ModelView*vec4(vNormal, 0.0)).xyz; // Transform vertex normal into eye coordinates
@@ -61,7 +66,8 @@ void main()
     */
     //Everything above is moved to fragment shader (task G)
     //distance = 0.1 + 0.5 * length(LightPosition) + 0.5*pow(length(LightPosition),2);
-    distance = 0.0*length(LightPosition)+ 0.1*pow(length(LightPosition),2);
+    distance1 = 0.1*pow(length(LightPosition),2);
+    distance2 = 0.1*pow(length(LightPosition2),2);
     gl_Position = Projection * ModelView * vPosition;
     texCoord = vTexCoord;
 }
