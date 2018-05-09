@@ -170,11 +170,11 @@ static void setToolCallbacks( void(*newLeftCallback)(vec2 transformedMovement), 
     // std::cout << leftXYold << " " << middXYold << std::endl; // For debugging
 }
 
-vec2 clickPrev;
-
+//vec2 clickPrev;
+//Fix the camera
 static void activateTool(int button) {
     currButton = button;
-    clickPrev = currMouseXYscreen(mouseX, mouseY);
+    prevPos = currMouseXYscreen(mouseX, mouseY);
 
     // std::cout << clickOrigin << std::endl;  // For debugging
 }
