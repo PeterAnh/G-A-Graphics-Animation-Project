@@ -305,8 +305,14 @@ void init( void )
     sceneObjs[1].loc = vec4(2.0, 1.0, 1.0, 1.0);
     sceneObjs[1].scale = 0.1;
     sceneObjs[1].texId = 0; // Plain texture
-    sceneObjs[1].brightness = 0.2; // The light's brightness is 5 times this (below).
+    sceneObjs[1].brightness = 0.2;  // The light's brightness is 5 times this (below).
 
+    addObject(55); //Second light
+    sceneObjs[2].loc = vec4(2.0, 1.0, 0.0, 0.0); //Directional light
+    sceneObjs[2].scale = 0.3 ;//Different size to distinguish with first light
+    sceneObjs[2].texId = 0;
+    sceneObjs[2].brightness = 0.2;
+	
     addObject(rand() % numMeshes); // A test mesh
 
     // We need to enable the depth test to discard fragments that
@@ -371,9 +377,16 @@ void display( void )
     view = Translate(0.0, 0.0, -viewDist) * RotateX(camRotUpAndOverDeg) * RotateY(camRotSidewaysDeg);
     
     SceneObject lightObj1 = sceneObjs[1]; 
-    vec4 lightPosition = view * lightObj1.loc ;
+    vec4 lightPosition = view * lightObj1.loc;
+    
+    //Draw the second light
+    SceneObject lightObj2 = sceneObjs[2];
+    vec4 lightPosition2 = view * lightObj2.loc;
 
     glUniform4fv( glGetUniformLocation(shaderProgram, "LightPosition"),
+                  1, lightPosition);
+                  
+    glUniform4fv( glGetUniformLocation(shaderProgram, "LightPosition2"),
                   1, lightPosition);
     CheckError();
 
@@ -385,6 +398,14 @@ void display( void )
         CheckError();
         glUniform3fv( glGetUniformLocation(shaderProgram, "DiffuseProduct"), 1, so.diffuse * rgb );
         glUniform3fv( glGetUniformLocation(shaderProgram, "SpecularProduct"), 1, so.specular * rgb );
+        
+                //Adding second light effect into the scene
+        vec3 rgb_2 = so.rgb * lightObj2.rgb * so.brightness * lightObj2.brightness * 2.0;
+        glUniform3fv( glGetUniformLocation(shaderProgram, "AmbientProduct2"), 1, so.ambient * rgb_2 );
+        CheckError();
+        glUniform3fv( glGetUniformLocation(shaderProgram, "DiffuseProduct2"), 1, so.diffuse * rgb_2 );
+        glUniform3fv( glGetUniformLocation(shaderProgram, "SpecularProduct2"), 1, so.specular * rgb_2 );
+                
         glUniform1f( glGetUniformLocation(shaderProgram, "Shininess"), so.shine );
         CheckError();
 
@@ -449,6 +470,17 @@ static void lightMenu(int id)
     }
     else if (id >= 71 && id <= 74) {
         toolObj = 1;
+        setToolCallbacks(adjustRedGreen, mat2(1.0, 0, 0, 1.0),
+                         adjustBlueBrightness, mat2(1.0, 0, 0, 1.0) );
+    }
+    else if (id == 80)
+    {
+        toolObj = 2;
+        setToolCallbacks(adjustLocXZ, camRotZ(),
+                         adjustBrightnessY, mat2( 1.0, 0.0, 0.0, 10.0) );
+    } else if (id == 81)
+    {
+        toolObj = 2;
         setToolCallbacks(adjustRedGreen, mat2(1.0, 0, 0, 1.0),
                          adjustBlueBrightness, mat2(1.0, 0, 0, 1.0) );
     }
