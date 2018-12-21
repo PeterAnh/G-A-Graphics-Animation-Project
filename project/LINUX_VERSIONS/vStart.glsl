@@ -10,7 +10,7 @@ uniform vec4 LightPosition, LightPosition2, SpotLightPosition;
 
 varying vec3 fN;
 varying vec3 fE;
-varying vec3 fL, fL2, fS;
+varying vec3 fL, fL2;
 
 attribute vec4 boneIDs;
 attribute vec4 boneWeights;
@@ -31,14 +31,12 @@ void main()
     // Transform vertex position into eye coordinates
     vec3 pos = (ModelView * vpos).xyz;
 
-    vec3 origin = (ModelView * vec4(0.0,0.0,0.0,1.0)).xyz;
+    vec3 origin = (ModelView * vec4(0.0,0.0,0.0,0.0)).xyz;
 
     fN = (ModelView * vnormal).xyz;
     fE = -pos;   
     fL = LightPosition.xyz - pos;
-    fL2 = LightPosition2.xyz - pos;
-    fS = SpotLightPosition.xyz - pos;
-
+    fL2 = LightPosition2.xyz - origin;
     
     gl_Position = Projection * ModelView * vpos;
     texCoord = vTexCoord;

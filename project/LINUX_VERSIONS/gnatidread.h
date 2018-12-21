@@ -8,7 +8,7 @@
 
 char dataDir[256];  // Stores the path to the models-textures folder.
 const int numTextures = 31; 
-const int numMeshes = 58;
+const int numMeshes = 60;
 
 
 
@@ -112,7 +112,7 @@ char objectMenuEntries[numMeshes][128] = {
     "41 Horse (head up)", "42 Skull", "43 Fighter Jet I", "44 Toad", "45 Convertible", 
     "46 Porsche II", "47 Hare", "48 Vintage Car", "49 Fighter Jet II", "50 Gargoyle", 
     "51 Chef", "52 Parasaurolophus", "53 Rooster", "54 T-rex", "55 Sphere", "56 Human Model",
-    "57 Human Model 2"
+    "57 Human Model 2", "58 Human Model 3", "59 Human Model 4"
 };
 
 

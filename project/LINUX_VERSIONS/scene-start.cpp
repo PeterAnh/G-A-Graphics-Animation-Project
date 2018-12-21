@@ -40,6 +40,7 @@ mat4 view; // View matrix - set in the display function.
 char lab[] = "Project1";
 char *programName = NULL; // Set in main 
 int numDisplayCalls = 0; // Used to calculate the number of frames per second
+int setRainbow = 0;
 
 //------Meshes----------------------------------------------------------------
 // Uses the type aiMesh from ../../assimp--3.0.1270/include/assimp/mesh.h
@@ -268,7 +269,7 @@ static void doRotate()
                                      
 //------Add an object to the scene--------------------------------------------
 
-static void addObject(int id)
+static void addObject(int id, int texture)
 {
 
     vec2 currPos = currMouseXYworld(camRotSidewaysDeg);
@@ -278,7 +279,7 @@ static void addObject(int id)
     sceneObjs[nObjects].loc[3] = 1.0;
 
     if (id!=0 && id!=55) {
-        if(id == 56 || id == 57) {
+        if(id == 56 || id == 57 || id == 58 || id == 59) {
             sceneObjs[nObjects].scale = 0.07;
         } else {
         sceneObjs[nObjects].scale = 0.005;
@@ -295,7 +296,11 @@ static void addObject(int id)
     sceneObjs[nObjects].angles[2] = 0.0;
 
     sceneObjs[nObjects].meshId = id;
-    sceneObjs[nObjects].texId = rand() % numTextures;
+	if(texture == 0) {
+    	sceneObjs[nObjects].texId = rand() % numTextures;
+    } else {
+    	sceneObjs[nObjects].texId = texture;
+    }
     sceneObjs[nObjects].texScale = 2.0;
 
     sceneObjs[nObjects].currentPose = 0.0;
@@ -341,26 +346,27 @@ void init( void )
     uBoneTransforms = glGetUniformLocation(shaderProgram, "boneTransforms");
 
     // Objects 0, and 1 are the ground and the first light.
-    addObject(0); // Square for the ground
+    addObject(0,0); // Square for the ground
     sceneObjs[0].loc = vec4(0.0, 0.0, 0.0, 1.0);
     sceneObjs[0].scale = 10.0;
     sceneObjs[0].angles[0] = 270.0; // Rotate it. <-- Yuki fixed this yay!
     sceneObjs[0].texScale = 5.0; // Repeat the texture.
 
-    addObject(55); // Sphere for the first light
+    addObject(55,0); // Sphere for the first light
     sceneObjs[1].loc = vec4(2.0, 1.0, 1.0, 1.0);
     sceneObjs[1].scale = 0.1;
     sceneObjs[1].texId = 0; // Plain texture
     sceneObjs[1].brightness = 0.2; // The light's brightness is 5 times this (below).
 
-    addObject(55);
-    sceneObjs[2].loc = vec4(2.0, 1.0, 1.0, 1.0);
+    addObject(55,0);
+    sceneObjs[2].loc = vec4(3.0, 1.0, 1.0, 0.0);
     sceneObjs[2].scale = 0.1;
     sceneObjs[2].texId = 0;
     sceneObjs[2].brightness = 0.2;
 
-    addObject(56);
-    addObject(57);
+    addObject(57,0);
+    addObject(58,0);
+    addObject(59,0);
     //addObject(rand() % numMeshes); // A test mesh
 
     // We need to enable the depth test to discard fragments that
@@ -455,8 +461,19 @@ void display( void )
 
     SceneObject lightObj2 = sceneObjs[2];
     vec4 lightPosition2 = view * lightObj2.loc;
-    lightPosition2.w = 0.0;
+    //lightPosition2.w = 0.0;
 
+    float timing = 0.001 * glutGet(GLUT_ELAPSED_TIME);
+    
+    vec4 colors;
+    if(setRainbow == 0)
+    {
+        colors = vec4(0.0,0.0,0.0,1.0);
+    } else {
+        colors = vec4(cos(timing),sin(timing),-sin(timing), 0.5);
+    }
+    
+    glUniform4fv( glGetUniformLocation(shaderProgram, "colorChange"),1, colors);
     glUniform4fv( glGetUniformLocation(shaderProgram, "LightPosition"),
                   1, lightPosition);
     CheckError();
@@ -501,7 +518,7 @@ void display( void )
 static void objectMenu(int id)
 {
     deactivateTool();
-    addObject(id);
+    addObject(id,0);
 }
 
 static void texMenu(int id)
@@ -749,6 +766,28 @@ void keyboard( unsigned char key, int x, int y )
             toolObj = currObject;
         }
         break;
+    //Duplicate objects
+    case 'u':
+		int objectMeshID;
+		int objectTextureID;
+		int currentObject;
+		
+		currentObject = currObject;
+		
+        objectMeshID = sceneObjs[currObject].meshId;
+        objectTextureID = sceneObjs[currObject].texId;
+        
+        addObject(objectMeshID, objectTextureID);
+        toolObj = currObject = currentObject;
+		break;
+	case 'c':
+	    if(setRainbow == 0)
+	    {
+	        setRainbow = 1;
+	    } else {
+	        setRainbow = 0;
+	    }
+	    break;
     default:
         break;
     }
