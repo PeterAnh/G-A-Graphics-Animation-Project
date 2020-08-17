@@ -8,7 +8,8 @@
 
 char dataDir[256];  // Stores the path to the models-textures folder.
 const int numTextures = 31; 
-const int numMeshes = 56;
+const int numMeshes = 60;
+
 
 
 // ------Functions to fail with an error mesage then a string or int------ 
@@ -110,7 +111,8 @@ char objectMenuEntries[numMeshes][128] = {
     "36 Chihuahua", "37 Sabre-toothed Tiger", "38 Lioness", "39 Fish", "40 Horse (head down)", 
     "41 Horse (head up)", "42 Skull", "43 Fighter Jet I", "44 Toad", "45 Convertible", 
     "46 Porsche II", "47 Hare", "48 Vintage Car", "49 Fighter Jet II", "50 Gargoyle", 
-    "51 Chef", "52 Parasaurolophus", "53 Rooster", "54 T-rex", "55 Sphere"
+    "51 Chef", "52 Parasaurolophus", "53 Rooster", "54 T-rex", "55 Sphere", "56 Human Model",
+    "57 Human Model 2", "58 Human Model 3", "59 Human Model 4"
 };
 
 
@@ -170,8 +172,8 @@ static void setToolCallbacks( void(*newLeftCallback)(vec2 transformedMovement), 
     // std::cout << leftXYold << " " << middXYold << std::endl; // For debugging
 }
 
-//vec2 clickPrev;
-//Fix the camera
+//Fix weird camera rotate
+
 static void activateTool(int button) {
     currButton = button;
     prevPos = currMouseXYscreen(mouseX, mouseY);

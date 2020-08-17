@@ -1,5 +1,7 @@
 # G&A (Graphics & Animation) Project
 
+![Alt Text](https://media.giphy.com/media/vcdF5wgMBdyylVaQ7X/giphy.gif)
+
 ## Project Part 1: Spec, Starting point, Sample Videos
 
 ### Group Report
