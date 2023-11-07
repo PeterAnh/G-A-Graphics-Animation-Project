@@ -863,7 +863,7 @@ void poseIncrementTimer(int unused)
 }
 //----------------------------------------------------------------------------
 
-char dirDefault1[] = "models-textures";
+char dirDefault1[] = "../../models-textures";
 char dirDefault3[] = "/tmp/models-textures";
 char dirDefault4[] = "/d/models-textures";
 char dirDefault2[] = "/cslinux/examples/CITS3003/project-files/models-textures";
