@@ -113,6 +113,22 @@ char objectMenuEntries[numMeshes][128] = {
     "51 Chef", "52 Parasaurolophus", "53 Rooster", "54 T-rex", "55 Sphere"
 };
 
+struct TextureId
+{
+    enum Id
+    {
+        Plain = 0
+    };
+};
+
+struct MeshId
+{
+    enum Id
+    {
+        Ground = 0,
+        Sphere = 55
+    };
+};
 
 //-----Code for using the mouse to adjust floats - you shouldn't need to modify this code.
 // Calling setTool(vX, vY, vMat, wX, wY, wMat) below makes the left button adjust *vX and *vY
@@ -133,21 +149,34 @@ static int mouseX=0, mouseY=0;         // Updated in the mouse-passive-motion fu
 
 static vec2 currMouseXYscreen(float x, float y) { 
     return vec2( x/windowWidth, (windowHeight-y)/windowHeight ); 
-} 
+}
 
-static void doToolUpdateXY(int x, int y) { 
-    if (currButton == GLUT_LEFT_BUTTON || currButton == GLUT_MIDDLE_BUTTON) {
-        vec2 currPos = vec2(currMouseXYscreen(x,y));
-        if (currButton==GLUT_LEFT_BUTTON)        
-            leftCallback(leftTrans * (currPos - prevPos));
-        else
-            middCallback(middTrans * (currPos - prevPos));
-            
-        prevPos = currPos;
-        glutPostRedisplay();
+static void doToolUpdateCallBack(void (*callback)(vec2 transformedMovement), mat2 trans)
+{
+    vec2 currPos = vec2(currMouseXYscreen(mouseX, mouseY));
+    callback(trans * (currPos - prevPos));
+    prevPos = currPos;
+    glutPostRedisplay();
+}
+
+static void doToolUpdateXY(int x, int y)
+{
+    mouseX = x;
+    mouseY = y;
+
+    switch (currButton)
+    {
+        case GLUT_LEFT_BUTTON:
+            doToolUpdateCallBack(leftCallback, leftTrans);
+            break;
+        case GLUT_MIDDLE_BUTTON:
+            doToolUpdateCallBack(middCallback, middTrans);
+            break;
+        default:
+            break;
     }
 }
-        
+
 static mat2 rotZ(float rotSidewaysDeg) {
     mat4 rot4 = RotateZ(rotSidewaysDeg);    
     return mat2(rot4[0][0], rot4[0][1], rot4[1][0], rot4[1][1]);
@@ -166,17 +195,11 @@ static void setToolCallbacks( void(*newLeftCallback)(vec2 transformedMovement), 
     middTrans = middT;
 
     currButton=-1;  // No current button to start with
-
-    // std::cout << leftXYold << " " << middXYold << std::endl; // For debugging
 }
-
-vec2 clickPrev;
 
 static void activateTool(int button) {
     currButton = button;
-    clickPrev = currMouseXYscreen(mouseX, mouseY);
-
-    // std::cout << clickOrigin << std::endl;  // For debugging
+    prevPos = currMouseXYscreen(mouseX, mouseY);
 }
 
 static void deactivateTool() {
